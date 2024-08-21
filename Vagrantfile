@@ -6,14 +6,14 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/jammy64"
 
   # Set the hostname
-  config.vm.hostname = "ubuntu24-elastic"
+  config.vm.hostname = "ElasticVPN"
 
   # Configure network settings
   config.vm.network "public_network", bridge: "#$default_network_interface"
 
   # Configure the virtual machine settings
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "Ubuntu24-elastic"
+    vb.name = "ElasticVPN"
     vb.memory = "1024"
     vb.cpus = 1
   end
