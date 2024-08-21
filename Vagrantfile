@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
   end
 
-  config.vm.synced_folder "scripts", "/app/src/"
+  config.vm.synced_folder "src", "/app/src/"
 
   # Provisioning script to install Docker and OpenVPN
   config.vm.provision "shell", inline: <<-SHELL
