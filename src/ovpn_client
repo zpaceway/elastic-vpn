@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+
+# Set timeout
+set timeout -1
+
+set fp [open "/app/src/key" r]
+set pass [read $fp]
+close $fp
+
+# Get the code and username from arguments
+set username [lindex $argv 0]
+
+# Run the OpenVPN Build Client command
+spawn docker run -v ovpn-data:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full $username nopass
+
+# Expect the passphrase prompt and send the code
+expect "Enter pass phrase for /etc/openvpn/pki/private/ca.key:"
+send "$pass\r"
+
+# Wait for the end of the process
+expect eof

@@ -15,4 +15,4 @@ if not exist "clients" (
 )
 
 :: Run the Vagrant SSH command with the username and output the result to a file
-vagrant ssh -c "/home/vagrant/ovpn_credentials %username%" > "clients/%username%.ovpn"
+vagrant ssh -c "/app/src/ovpn_credentials %username%" > "clients/%username%.ovpn"

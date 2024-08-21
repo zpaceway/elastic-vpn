@@ -10,4 +10,4 @@ if "%1"=="" (
 set username=%1
 
 :: Run the Vagrant SSH command with the username
-vagrant ssh -c "/home/vagrant/ovpn_client %username%"
+vagrant ssh -c "/app/src/ovpn_client %username%"

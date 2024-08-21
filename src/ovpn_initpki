@@ -1,0 +1,31 @@
+#!/usr/bin/expect -f
+
+# Read the passphrase from the file named 'key'
+set fp [open "/app/src/key" r]
+set pass [read $fp]
+close $fp
+
+# Set timeout
+set timeout -1
+
+# Run the OpenVPN PKI initialization command
+spawn docker run -v ovpn-data:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
+
+# Expect the passphrase prompts and send the passphrase from the file
+expect "Enter New CA Key Passphrase:"
+send "$pass\r"
+
+expect "Re-Enter New CA Key Passphrase:"
+send "$pass\r"
+
+expect "Common Name (eg: your user, host, or server name)"
+send "\r"
+
+expect "Enter pass phrase for /etc/openvpn/pki/private/ca.key:"
+send "$pass\r"
+
+expect "Enter pass phrase for /etc/openvpn/pki/private/ca.key:"
+send "$pass\r"
+
+# Wait for the end of the process
+expect eof
